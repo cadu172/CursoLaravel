@@ -1,0 +1,571 @@
+Psy Shell v0.10.5 (PHP 8.0.1 — cli) by Justin Hileman
+>>> Brand::all()
+PHP Error:  Class "Brand" not found in /home/vagrant/code/back-end/laravel5.8eval()'d code on line 1
+>>> use \App\Model\Brand;
+>>> Brand::all()
+PHP Error:  Class "App\Model\Brand" not found in /home/vagrant/code/back-end/laravel5.8eval()'d code on line 1
+>>> use \App\Models\Brand;
+>>> Brand::all()
+=> Illuminate\Database\Eloquent\Collection {#4309
+     all: [],
+   }
+>>> $brand = new Brand();
+=> App\Models\Brand {#4296}
+>>> $brand->name = "Xiaomi"
+=> "Xiaomi"
+>>> $brand->save();
+=> true
+>>> $brand->name = "Apple"
+=> "Apple"
+>>> $brand->name = "LG"
+=> "LG"
+>>> $brand->name = "Samsung"
+=> "Samsung"
+>>> $brand->save();
+=> true
+>>> $brand = new Brand();
+=> App\Models\Brand {#4316}
+>>> $brand->name = "Apple"
+=> "Apple"
+>>> $brand->save();
+=> true
+>>> $brand = new Brand();
+=> App\Models\Brand {#4314}
+>>> $brand->name = "LG"
+=> "LG"
+>>> $brand->save();
+=> true
+>>> $brand = new Brand();
+=> App\Models\Brand {#4297}
+>>> $brand->name = "XIAOMI"
+=> "XIAOMI"
+>>> $brand->save();
+=> true
+>>> exit
+Exit:  Goodbye
+vagrant@ubuntu-focal:~/code/back-end/laravel5.8$ php artisan tinker
+Psy Shell v0.10.5 (PHP 8.0.1 — cli) by Justin Hileman
+>>> $brand = new Brand();
+PHP Error:  Class "Brand" not found in /home/vagrant/code/back-end/laravel5.8eval()'d code on line 1
+>>> use \App\Models\Brand
+>>> ;
+>>>
+>>>
+>>> $brand = new Brand();
+PHP Error:  syntax error, unexpected token "=", expecting variable in /home/vagrant/code/back-end/laravel5.8/app/Models/Brand.php on line 12
+>>> use \App\Models\Brand;
+>>> brand::all();
+PHP Error:  syntax error, unexpected token "=", expecting variable in /home/vagrant/code/back-end/laravel5.8/app/Models/Brand.php on line 12
+>>> Brand::all();
+PHP Error:  syntax error, unexpected token "=", expecting variable in /home/vagrant/code/back-end/laravel5.8/app/Models/Brand.php on line 12
+>>> Brand::all()
+PHP Error:  syntax error, unexpected token "=", expecting variable in /home/vagrant/code/back-end/laravel5.8/app/Models/Brand.php on line 12
+>>> Brand::all()
+=> Illuminate\Database\Eloquent\Collection {#4313
+     all: [
+       App\Models\Brand {#4314
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4315
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4316
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4317
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+     ],
+   }
+>>> Brand::all()
+=> Illuminate\Database\Eloquent\Collection {#4318
+     all: [
+       App\Models\Brand {#4299
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4305
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4306
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4323
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+     ],
+   }
+>>> $brand = Brand::create(["Motorola"])
+Illuminate\Database\QueryException with message 'SQLSTATE[HY000]: General error: 1364 Field 'name' doesn't have a default value (SQL: insert into `brands` (`updated_at`, `created_at`) values (2021-02-05 02:09:26, 2021-02-05 02:09:26))'
+>>> $brand = Brand::create(["Motorola"])
+Illuminate\Database\QueryException with message 'SQLSTATE[HY000]: General error: 1364 Field 'name' doesn't have a default value (SQL: insert into `brands` (`updated_at`, `created_at`) values (2021-02-05 02:09:40, 2021-02-05 02:09:40))'
+>>> $brand = Brand::create(["name"=>"Motorola"])
+=> App\Models\Brand {#4316
+     name: "Motorola",
+     updated_at: "2021-02-05 02:10:14",
+     created_at: "2021-02-05 02:10:14",
+     id: 5,
+   }
+>>> Brand::all()
+=> Illuminate\Database\Eloquent\Collection {#4303
+     all: [
+       App\Models\Brand {#4321
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4313
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4309
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4310
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4322
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> exit
+Exit:  Goodbye
+vagrant@ubuntu-focal:~/code/back-end/laravel5.8$ php artisan tinker
+Psy Shell v0.10.5 (PHP 8.0.1 — cli) by Justin Hileman
+>>> use \App\Models\Brand
+>>> Brand::all()
+=> Illuminate\Database\Eloquent\Collection {#4312
+     all: [
+       App\Models\Brand {#4313
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4314
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4315
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4316
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4317
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::find(1)
+=> App\Models\Brand {#4310
+     id: 1,
+     name: "Samsung",
+     created_at: "2021-02-05 01:55:44",
+     updated_at: "2021-02-05 02:01:12",
+   }
+>>> Brand::find(2)
+=> App\Models\Brand {#4299
+     id: 2,
+     name: "Apple",
+     created_at: "2021-02-05 02:02:01",
+     updated_at: "2021-02-05 02:02:01",
+   }
+>>> Brand::find([2,4])
+=> Illuminate\Database\Eloquent\Collection {#4312
+     all: [
+       App\Models\Brand {#4320
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4319
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+     ],
+   }
+>>> Brand::where(1)
+=> Illuminate\Database\Eloquent\Builder {#4313}
+>>> Brand::where(id,1)
+PHP Error:  Undefined constant "id" in /home/vagrant/code/back-end/laravel5.8eval()'d code on line 1
+>>> Brand::where('id',1)
+=> Illuminate\Database\Eloquent\Builder {#4312}
+>>> Brand::where('id',2)
+=> Illuminate\Database\Eloquent\Builder {#4320}
+>>> Brand::where('id',2)->get()
+=> Illuminate\Database\Eloquent\Collection {#4314
+     all: [
+       App\Models\Brand {#4304
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::where('id',[2,5])->get()
+Illuminate\Database\QueryException with message 'SQLSTATE[HY093]: Invalid parameter number (SQL: select * from `brands` where `id` = 2)'
+>>> Brand::where('id',5)->get()
+=> Illuminate\Database\Eloquent\Collection {#4293
+     all: [
+       App\Models\Brand {#4319
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::where('id','==',5)->get()
+=> Illuminate\Database\Eloquent\Collection {#4314
+     all: [],
+   }
+>>> Brand::where('id','=',5)->get()
+=> Illuminate\Database\Eloquent\Collection {#4323
+     all: [
+       App\Models\Brand {#4309
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::where('id','<',5)->get()
+=> Illuminate\Database\Eloquent\Collection {#4325
+     all: [
+       App\Models\Brand {#4302
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4319
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4326
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4327
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+     ],
+   }
+>>> Brand::where('name','=',"Apple")->get()
+=> Illuminate\Database\Eloquent\Collection {#4323
+     all: [
+       App\Models\Brand {#4312
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::whereBetween('id',[1,5])->get()
+=> Illuminate\Database\Eloquent\Collection {#4303
+     all: [
+       App\Models\Brand {#4293
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4327
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4320
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4330
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4331
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::whereBetween('id',[3,5])->get()
+=> Illuminate\Database\Eloquent\Collection {#4318
+     all: [
+       App\Models\Brand {#4302
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4324
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4334
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::whereNotBetween('id',[3,5])->get()
+=> Illuminate\Database\Eloquent\Collection {#4328
+     all: [
+       App\Models\Brand {#4309
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4305
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::whereNotIn('id',[3,5])->get()
+=> Illuminate\Database\Eloquent\Collection {#4330
+     all: [
+       App\Models\Brand {#4326
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4327
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4323
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+     ],
+   }
+>>> Brand::whereIn('id',[3,5])->get()
+=> Illuminate\Database\Eloquent\Collection {#4303
+     all: [
+       App\Models\Brand {#4302
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4325
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::where('name','Apple')->get()
+=> Illuminate\Database\Eloquent\Collection {#4327
+     all: [
+       App\Models\Brand {#4312
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::where('name','like','A%')->get()
+=> Illuminate\Database\Eloquent\Collection {#4328
+     all: [
+       App\Models\Brand {#4316
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::where('name','like','%A%')->get()
+=> Illuminate\Database\Eloquent\Collection {#4305
+     all: [
+       App\Models\Brand {#4312
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4335
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4334
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4336
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::where('name','like','%L%')->get()
+=> Illuminate\Database\Eloquent\Collection {#4324
+     all: [
+       App\Models\Brand {#4338
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4316
+         id: 3,
+         name: "LG",
+         created_at: "2021-02-05 02:02:10",
+         updated_at: "2021-02-05 02:02:10",
+       },
+       App\Models\Brand {#4326
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> $marca = "A";
+=> "A"
+>>> Brand::where('name','like',"$marca")->get()
+=> Illuminate\Database\Eloquent\Collection {#4316
+     all: [],
+   }
+>>> Brand::where('name','like',"%$marca")->get()
+=> Illuminate\Database\Eloquent\Collection {#4323
+     all: [
+       App\Models\Brand {#4305
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>> Brand::where('name','like',"$marca%")->get()
+=> Illuminate\Database\Eloquent\Collection {#4336
+     all: [
+       App\Models\Brand {#4335
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+     ],
+   }
+>>> Brand::where('name','like',"%$marca%")->get()
+=> Illuminate\Database\Eloquent\Collection {#4326
+     all: [
+       App\Models\Brand {#4331
+         id: 1,
+         name: "Samsung",
+         created_at: "2021-02-05 01:55:44",
+         updated_at: "2021-02-05 02:01:12",
+       },
+       App\Models\Brand {#4340
+         id: 2,
+         name: "Apple",
+         created_at: "2021-02-05 02:02:01",
+         updated_at: "2021-02-05 02:02:01",
+       },
+       App\Models\Brand {#4342
+         id: 4,
+         name: "XIAOMI",
+         created_at: "2021-02-05 02:02:21",
+         updated_at: "2021-02-05 02:02:21",
+       },
+       App\Models\Brand {#4305
+         id: 5,
+         name: "Motorola",
+         created_at: "2021-02-05 02:10:14",
+         updated_at: "2021-02-05 02:10:14",
+       },
+     ],
+   }
+>>>

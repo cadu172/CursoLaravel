@@ -1,0 +1,4 @@
+29/04/2021 - projeto um-pra-um inicia
+banco de dados criado e tabela clientes e enderecos
+
+=> continuar na aula 111 (utilizando tinker para adicionar registros)
