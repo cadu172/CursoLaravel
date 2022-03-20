@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home2');
 
-Route::get('/produtos', [App\Http\Controllers\ProdutoControlador::class, 'index'])
-    ->name('produto')
-    ->middleware("auth");// pode ser chamada aqui ou no contrutor do controlador
+Route::get('/produtos', [App\Http\Controllers\ProdutoController::class, 'index'])
+    ->name('produtos');
 
-
-Route::get("/usuario", function() {
-    return view("usuario");
+Route::get('/departamentos', [App\Http\Controllers\DepartamentoController::class, 'index'])
+    ->name('departamentos');
+    
+Route::get('/usuario', function() {
+    return view('usuario');
 });
