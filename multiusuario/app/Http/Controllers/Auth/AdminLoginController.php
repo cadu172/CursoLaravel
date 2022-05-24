@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -44,6 +45,28 @@ class AdminLoginController extends Controller
     }
 
     public function login(Request $request) {
-        return "foi";
+        
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        // retorna true ou false ao realizar login
+        $loginSuccess = Auth::guard('admin')->attempt($credentials, $request->filled('remember'));
+
+        /*
+        redireciona para a página do dashboard */
+        if ( $loginSuccess ) {
+            return redirect()->intended(route('admin.dashboard'));
+        }
+
+        // volta para página anterior
+        return redirect()->back()->withInputs($request->only(['email','remember']));
+
     }
 }
