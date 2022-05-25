@@ -31,7 +31,7 @@ class AdminLoginController extends Controller
     protected $redirectTo = RouteServiceProvider::ADMIN_LOGIN;
 
     public function index() {
-        return view("auth.admin-login");
+        return view("auth.admin-login");        
     }
 
     /**
@@ -40,8 +40,9 @@ class AdminLoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        $this->middleware('guest:admin');
+    { 
+       //return "AAAAAAAAAAAAAAAAAAAAAAAAAA";
+       //$this->middleware('auth:admin');
     }
 
     public function login(Request $request) {
@@ -69,4 +70,18 @@ class AdminLoginController extends Controller
         return redirect()->back()->withInputs($request->only(['email','remember']));
 
     }
+
+
+    public function logout(Request $request) {
+        
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+     
+        $request->session()->regenerateToken();
+     
+        return view("auth.admin-login");      
+        
+
+    }    
 }
