@@ -30,8 +30,9 @@ class AdminLoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::ADMIN_LOGIN;
 
-    public function index() {
-        return view("auth.admin-login");        
+    public function index() {        
+        //se não vai para tela de login
+        return view("auth.admin-login");
     }
 
     /**
@@ -41,8 +42,6 @@ class AdminLoginController extends Controller
      */
     public function __construct()
     { 
-       //return "AAAAAAAAAAAAAAAAAAAAAAAAAA";
-       //$this->middleware('auth:admin');
     }
 
     public function login(Request $request) {
@@ -72,16 +71,16 @@ class AdminLoginController extends Controller
     }
 
 
-    public function logout(Request $request) {
+    public function logout(Request $request) {        
         
-        Auth::logout();
- 
-        $request->session()->invalidate();
-     
-        $request->session()->regenerateToken();
-     
-        return view("auth.admin-login");      
+        // deslogar o guard admin
+        Auth::guard('admin')->logout(); 
         
-
+        // volta para página de login padrão
+        return redirect()->guest(route('admin.login'));
     }    
 }
+
+
+*** falta ajustar a rotina de logout do usuário comun e do admin
+quando estou deslogando com o admin ele está chamando o logou de usuário comum ai não desloga, precisa ver qual usuário está sendo chamado no logout e matar a sessão dele

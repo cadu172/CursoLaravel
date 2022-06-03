@@ -8,7 +8,7 @@
                 <div class="card-header">Login - Área do Administrador</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login-admin.post') }}">
+                    <form method="POST" action="{{ route('admin.login.post') }}">
                         @csrf
 
                         <div class="row mb-3">
