@@ -80,7 +80,3 @@ class AdminLoginController extends Controller
         return redirect()->guest(route('admin.login'));*/
     //}    
 }
-
-
-/**** falta ajustar a rotina de logout do usuário comun e do admin
-quando estou deslogando com o admin ele está chamando o logou de usuário comum ai não desloga, precisa ver qual usuário está sendo chamado no logout e matar a sessão dele*/
