@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         // rota padrão caso não esteja autenticado
-        $routeName = "login";
+        $routeName = "login"; // rota padrão para usuário comum
         
         // caso seja um guard de login de administrador
         if ( $exception->guards()[0]=='admin'  ) {
