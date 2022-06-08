@@ -20,24 +20,14 @@
                             <th scope="col">E-Mail</th>                            
                         </thead>
                         <tbody>
+                            @foreach($clientes as $cli)
                             <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>                                
+                                <td>{{$cli->id}}</td>
+                                <td>{{$cli->nome}}</td>
+                                <td>{{$cli->sobrenome}}</td>
+                                <td>{{$cli->email}}</td>                                
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>                                
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>                                
-                            </tr>
+                            @endforeach
                         </tbody>
                         <tfoot></tfoot>
                     </table>
