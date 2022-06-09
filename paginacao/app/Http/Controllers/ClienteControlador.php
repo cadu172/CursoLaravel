@@ -15,15 +15,9 @@ class ClienteControlador extends Controller
     public function index()
     {
         //
-        //$clientes = Clientes::all();
-        $clientes = Clientes::paginate(10);
-<<<<<<< HEAD
-=======
+        $clientes = Clientes::all();
+        //$clientes = Clientes::paginate(10);
 
-        dd($clientes);
-        
-        // retorna a view com os dados
->>>>>>> 2f3c9c7075b50bfb0da9cd9ab2a7a3e15444d342
         return view('index',
             ['clientes'=>$clientes]);
     }
