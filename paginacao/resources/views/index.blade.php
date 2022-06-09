@@ -30,9 +30,9 @@
                             @endforeach
                         </tbody>
                         <tfoot></tfoot>
-                    </table>
+                    </table>                    
                 </div>
-                <div class="card-footer">Paginação</div>
+                <div class="d-flex justify-content-center">{{$clientes->links()}}</div>
             </div>
         </div>
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
