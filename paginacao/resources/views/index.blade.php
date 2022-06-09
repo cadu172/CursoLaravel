@@ -29,11 +29,18 @@
                             </tr>
                             @endforeach
                         </tbody>
+<<<<<<< HEAD
                     </table>
                 </div>
                 <div class="card-footer">
                     {{$clientes->links()}}
                 </div>
+=======
+                        <tfoot></tfoot>
+                    </table>                    
+                </div>
+                <div class="d-flex justify-content-center">{{$clientes->links()}}</div>
+>>>>>>> 2f3c9c7075b50bfb0da9cd9ab2a7a3e15444d342
             </div>
         </div>
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
