@@ -5,13 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <title>Paginação</title>
-        <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <div class="card text-center">
                 <div class="card-header">Tabela de Cliente</div>
                 <div class="card-body">
+                    <div class="card-title">
+                        Exibindo {{$clientes->count()}} clientes de {{$clientes->total()}} ({{$clientes->firstItem()}} a {{$clientes->lastItem()}})
+                    </div>
                     <table class="table table-hoover">
                         <thead>
                             <th scope="col">#</th>
@@ -31,7 +34,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="container">teste</div>
+                <div class="card-footer"><div>{{$clientes->links()}}</div></div>
             </div>
         </div>
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
