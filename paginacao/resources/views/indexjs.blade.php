@@ -33,7 +33,23 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer">footer</div>
+                <div class="card-footer">
+                    <nav id="pagination">
+                        <ul class="pagination">
+                          <!--li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">2</a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                          </li-->
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
@@ -59,8 +75,21 @@
                 }
             }
 
+            // cria uma nova linha na tabela
+            function addItem_Pagination(p_ItemPagina) {
+                $("#pagination>ul").append ('<li class="page-item"><a class="page-link" href="#">' + p_ItemPagina + '</a></li>');
+            }
+
+            function getComponentPaginaton(p_jsonData) {
+
+                for ( i = 0; i < p_jsonData.total; i++ ) {
+                    addItem_Pagination(p_jsonData.current_page);
+                }
+
+            }
+
             // procedure: montar a tabela com os clientes cadastrados no banco
-            function getTable_Clientes(pagina) {
+            function getData_Clientes(pagina) {
 
                 // inicializar tabela
                 $("#Table_Clientes>tbody>tr").remove();
@@ -68,15 +97,19 @@
                 // consulta AJAX
                 $.get('/indexJSON',{page: pagina}, function(jsonData) {
 
-                        console.log(jsonData);
+                    console.log(jsonData);
+
                     // chamar a rotina que monta as linhas
                     getRows_Clientes(jsonData.data);
+
+                    // rotina para montar o componente de paginação
+                    getComponentPaginaton(jsonData);
                 });
             }
 
             // função main()
             $(() => {
-                getTable_Clientes(3);
+                getData_Clientes(1);
             });
         </script>
     </body>
