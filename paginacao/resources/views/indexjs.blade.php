@@ -23,33 +23,20 @@
                             <th scope="col">Sobrenome</th>
                             <th scope="col">E-Mail</th>
                         </thead>
-                        <tbody>                            
+                        <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>
-                            </tr>                            
-                            <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>
-                            </tr>                            
-                            <tr>
-                                <td>1</td>
-                                <td>Carlos Eduardo</td>
-                                <td>dos Santos Roberto</td>
-                                <td>cadu172@gmail.com</td>
-                            </tr>                            
-
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer">footer</div>
             </div>
         </div>
-        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>        
+        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
         <script type="text/javascript">
 
             // cria uma nova linha na tabela
@@ -61,17 +48,17 @@
                     '<td>'+ p_Cliente.sobrenome +'</td>'+
                     '<td>'+ p_Cliente.email +'</td>'+
                     '</tr>'
-                );    
+                );
             }
 
             function getRows_Clientes(p_jsonData) {
                 for(i = 0; i < p_jsonData.length; i++)
                 {
                     // rotina responsávavel por incluir uma linha
-                    addRow_Clientes(p_jsonData[i]);                    
-                }                
+                    addRow_Clientes(p_jsonData[i]);
+                }
             }
-            
+
             // procedure: montar a tabela com os clientes cadastrados no banco
             function getTable_Clientes(pagina) {
 
@@ -79,15 +66,17 @@
                 $("#Table_Clientes>tbody>tr").remove();
 
                 // consulta AJAX
-                $.get('/indexJSON',{page: pagina}, function(jsonData) {                                        
+                $.get('/indexJSON',{page: pagina}, function(jsonData) {
+
+                        console.log(jsonData);
                     // chamar a rotina que monta as linhas
                     getRows_Clientes(jsonData.data);
                 });
             }
-            
+
             // função main()
-            $(() => {                
-                getTable_Clientes(3);                
+            $(() => {
+                getTable_Clientes(3);
             });
         </script>
     </body>

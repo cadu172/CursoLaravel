@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+//Auth::routes();
 Route::get('/',[App\Http\Controllers\ClienteControlador::class, 'index'])->name('index');
 Route::get('/indexJS',[App\Http\Controllers\ClienteControlador::class, 'indexJS'])->name('indexJS');
 Route::get('/indexJSON',[App\Http\Controllers\ClienteControlador::class, 'indexJSON'])->name('indexJSON');
