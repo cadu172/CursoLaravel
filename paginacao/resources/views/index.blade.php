@@ -34,7 +34,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer"><div>{{$clientes->links()}}</div></div>
+                <div class="card-footer">{{$clientes->links()}}</div>
             </div>
         </div>
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>

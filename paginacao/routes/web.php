@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 Route::get('/',[App\Http\Controllers\ClienteControlador::class, 'index'])->name('index');
+Route::get('/indexJS',[App\Http\Controllers\ClienteControlador::class, 'indexJS'])->name('indexJS');
+Route::get('/indexJSON',[App\Http\Controllers\ClienteControlador::class, 'indexJSON'])->name('indexJSON');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*
