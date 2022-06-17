@@ -11,7 +11,7 @@ class ClienteControlador extends Controller
     {
 
         // obtem um array com os dados dos clientes
-        $clientes = Clientes::paginate(10);
+        $clientes = Clientes::paginate(100);
 
         // retorna a view com os dados
         return view('index',

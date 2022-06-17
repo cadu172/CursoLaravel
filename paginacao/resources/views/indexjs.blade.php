@@ -76,8 +76,8 @@
             }
 
             // cria uma nova linha na tabela
-            function addItem_Pagination(p_ItemPagina,index) {                
-                
+            function addItem_Pagination(p_ItemPagina,index) {
+
                 let strRetorno = '<li class="page-item">';
 
                 if ( p_ItemPagina.current_page == index ) {
@@ -91,7 +91,7 @@
             function addAnterior_Pagination(p_ItemPagina) {
 
                 let strRetorno = '';
-                
+
                 if ( p_ItemPagina.current_page == 1 ) {
                     strRetorno += '<li class="page-item" disabled>';
                 }
@@ -101,13 +101,13 @@
 
                 return strRetorno += '<a class="page-link" href="#">Anterior</a></li>';
 
-            }   
-            
+            }
+
             // cria uma nova linha na tabela
             function addProximo_Pagination(p_ItemPagina) {
-                
+
                 let strRetorno = '';
-                
+
                 if ( p_ItemPagina.current_page == p_ItemPagina.last_page ) {
                     strRetorno += '<li class="page-item" disabled>';
                 }
@@ -117,9 +117,38 @@
 
                 return strRetorno += '<a class="page-link" href="#">Próximo</a></li>'
 
-            }             
+            }
 
             function getComponentPaginaton(p_jsonData) {
+
+                let paginaINI = 1; // pagina inicial
+                let paginaMAX = p_jsonData.last_page; // quantidade de paginas
+                let paginaFIN = paginaMAX; // pagina final
+                let maxItems = 14; // quantidade de items
+                let medItems = 7;  // metade do maximo de itens
+
+                if ( paginaMAX > maxItems ) {
+
+                    if ( p_jsonData.current_page > medItems  ) {
+
+                        paginaINI = p_jsonData.current_page-medItems;
+                        paginaFIN = p_jsonData.current_page+medItems;
+
+                        // limitar até o máximo de páginas
+                        if ( paginaFIN > paginaMAX ) {
+
+                            // ultima página // last_page
+                            paginaFIN = paginaMAX;
+
+                            // a pagina inicial sera a quantidade maxima de itens na tela + 1
+                            paginaINI = paginaFIN-maxItems+1;
+                        }
+
+                    }
+                    else {
+                        paginaFIN = maxItems;
+                    }
+                }
 
                 // limpar lista
                 $("#pagination>ul>li").remove();
@@ -127,7 +156,7 @@
                 // botão anterior
                 $("#pagination>ul").append(addAnterior_Pagination(p_jsonData));
 
-                for ( i = 1; i <= p_jsonData.total; i++ ) {
+                for ( i = paginaINI; i <= paginaFIN; i++ ) {
                     $("#pagination>ul").append(addItem_Pagination(p_jsonData, i));
                 }
 
@@ -155,7 +184,7 @@
 
             // função main()
             $(() => {
-                getData_Clientes(1);
+                getData_Clientes(6);
             });
         </script>
     </body>
