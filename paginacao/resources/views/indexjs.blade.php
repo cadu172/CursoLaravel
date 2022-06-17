@@ -76,15 +76,63 @@
             }
 
             // cria uma nova linha na tabela
-            function addItem_Pagination(p_ItemPagina) {
-                $("#pagination>ul").append ('<li class="page-item"><a class="page-link" href="#">' + p_ItemPagina + '</a></li>');
+            function addItem_Pagination(p_ItemPagina,index) {                
+                
+                let strRetorno = '<li class="page-item">';
+
+                if ( p_ItemPagina.current_page == index ) {
+                    strRetorno = '<li class="page-item active" aria-current="page">';
+                }
+
+                return strRetorno + '<a class="page-link" href="#">' + index + '</a></li>';
             }
+
+            // cria uma nova linha na tabela
+            function addAnterior_Pagination(p_ItemPagina) {
+
+                let strRetorno = '';
+                
+                if ( p_ItemPagina.current_page == 1 ) {
+                    strRetorno += '<li class="page-item" disabled>';
+                }
+                else {
+                    strRetorno += '<li class="page-item">';
+                }
+
+                return strRetorno += '<a class="page-link" href="#">Anterior</a></li>';
+
+            }   
+            
+            // cria uma nova linha na tabela
+            function addProximo_Pagination(p_ItemPagina) {
+                
+                let strRetorno = '';
+                
+                if ( p_ItemPagina.current_page == p_ItemPagina.last_page ) {
+                    strRetorno += '<li class="page-item" disabled>';
+                }
+                else {
+                    strRetorno += '<li class="page-item">';
+                }
+
+                return strRetorno += '<a class="page-link" href="#">Próximo</a></li>'
+
+            }             
 
             function getComponentPaginaton(p_jsonData) {
 
-                for ( i = 0; i < p_jsonData.total; i++ ) {
-                    addItem_Pagination(p_jsonData.current_page);
+                // limpar lista
+                $("#pagination>ul>li").remove();
+
+                // botão anterior
+                $("#pagination>ul").append(addAnterior_Pagination(p_jsonData));
+
+                for ( i = 1; i <= p_jsonData.total; i++ ) {
+                    $("#pagination>ul").append(addItem_Pagination(p_jsonData, i));
                 }
+
+                // botão proximo
+                $("#pagination>ul").append(addProximo_Pagination(p_jsonData));
 
             }
 
@@ -96,8 +144,6 @@
 
                 // consulta AJAX
                 $.get('/indexJSON',{page: pagina}, function(jsonData) {
-
-                    console.log(jsonData);
 
                     // chamar a rotina que monta as linhas
                     getRows_Clientes(jsonData.data);
