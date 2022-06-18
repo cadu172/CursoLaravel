@@ -214,6 +214,8 @@
 
                 {{asset('js/app.js')}}
 
+                projeto concluido
+
                  */
 
             });
