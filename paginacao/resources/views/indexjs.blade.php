@@ -5,17 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <title>Paginação</title>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">        
+        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
     </head>
     <body>
         <div class="container">
             <div class="card text-center">
                 <div class="card-header">Tabela de Cliente</div>
                 <div class="card-body">
-                    <div class="card-title">
-                        Exibindo 10 clientes de 10000 (10 a 10000)
-                    </div>
+                    <div class="card-title" id="cardTitle"></div>
                     <table class="table table-hoover" id="Table_Clientes">
                         <thead>
                             <th scope="col">#</th>
@@ -34,25 +32,12 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <nav id="pagination">
-                        <ul class="pagination">
-                          <!--li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">2</a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                          </li-->
-                        </ul>
+                    <nav id="paginator">
+                        <ul class="pagination"></ul>
                     </nav>
                 </div>
             </div>
-        </div>
-        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
+        </div>        
         <script type="text/javascript">
 
             // cria uma nova linha na tabela
@@ -84,7 +69,7 @@
                     strRetorno = '<li class="page-item active" aria-current="page">';
                 }
 
-                return strRetorno + '<a class="page-link" href="#">' + index + '</a></li>';
+                return strRetorno + '<a class="page-link" pagina="' + index + '" href="#">' + index + '</a></li>';
             }
 
             // cria uma nova linha na tabela
@@ -93,13 +78,15 @@
                 let strRetorno = '';
 
                 if ( p_ItemPagina.current_page == 1 ) {
-                    strRetorno += '<li class="page-item" disabled>';
+                    strRetorno += '<li class="page-item" disabled="disabled">';
                 }
                 else {
                     strRetorno += '<li class="page-item">';
                 }
 
-                return strRetorno += '<a class="page-link" href="#">Anterior</a></li>';
+                strRetorno += '<a class="page-link" pagina="'+(p_ItemPagina.current_page-1)+'" href="#">Anterior</a></li>';
+
+                return strRetorno;
 
             }
 
@@ -109,13 +96,18 @@
                 let strRetorno = '';
 
                 if ( p_ItemPagina.current_page == p_ItemPagina.last_page ) {
-                    strRetorno += '<li class="page-item" disabled>';
+                    strRetorno += '<li class="page-item" disabled="disabled">';
                 }
                 else {
                     strRetorno += '<li class="page-item">';
                 }
 
-                return strRetorno += '<a class="page-link" href="#">Próximo</a></li>'
+                if (  p_ItemPagina.current_page < p_ItemPagina.last_page )
+                    strRetorno += '<a class="page-link" pagina="'+(p_ItemPagina.current_page+1)+'" href="#">Próximo</a></li>'
+                else
+                strRetorno += '<a class="page-link" pagina="0" href="#">Próximo</a></li>';
+
+                return strRetorno;
 
             }
 
@@ -124,8 +116,8 @@
                 let paginaINI = 1; // pagina inicial
                 let paginaMAX = p_jsonData.last_page; // quantidade de paginas
                 let paginaFIN = paginaMAX; // pagina final
-                let maxItems = 14; // quantidade de items
-                let medItems = 7;  // metade do maximo de itens
+                let maxItems = 10; // quantidade de items
+                let medItems = 5;  // metade do maximo de itens
 
                 if ( paginaMAX > maxItems ) {
 
@@ -151,40 +143,79 @@
                 }
 
                 // limpar lista
-                $("#pagination>ul>li").remove();
+                $("#paginator>ul>li").remove();
 
                 // botão anterior
-                $("#pagination>ul").append(addAnterior_Pagination(p_jsonData));
+                $("#paginator>ul").append(addAnterior_Pagination(p_jsonData));
 
                 for ( i = paginaINI; i <= paginaFIN; i++ ) {
-                    $("#pagination>ul").append(addItem_Pagination(p_jsonData, i));
+                    $("#paginator>ul").append (addItem_Pagination(p_jsonData, i));
                 }
 
                 // botão proximo
-                $("#pagination>ul").append(addProximo_Pagination(p_jsonData));
+                $("#paginator>ul").append(addProximo_Pagination(p_jsonData));
+
+                // barra de titulo
+                $("#cardTitle").html('Exibindo ' + p_jsonData.per_page + ' Clientes de ' + p_jsonData.total + ' (' + p_jsonData.from + ' a ' + p_jsonData.to + ')');
 
             }
 
             // procedure: montar a tabela com os clientes cadastrados no banco
             function getData_Clientes(pagina) {
 
-                // inicializar tabela
-                $("#Table_Clientes>tbody>tr").remove();
+                // só faz a busca se a página for > 0
+                if ( pagina != 0 ) {
 
-                // consulta AJAX
-                $.get('/indexJSON',{page: pagina}, function(jsonData) {
+                    // inicializar tabela
+                    $("#Table_Clientes>tbody>tr").remove();
+                    
+                    // consulta AJAX
+                    $.get('/indexJSON',{page: pagina}, function(jsonData) {
 
-                    // chamar a rotina que monta as linhas
-                    getRows_Clientes(jsonData.data);
+                        //console.log(p_jsonData);
 
-                    // rotina para montar o componente de paginação
-                    getComponentPaginaton(jsonData);
-                });
+                        // chamar a rotina que monta as linhas
+                        getRows_Clientes(jsonData.data);
+
+                        // rotina para montar o componente de paginação
+                        getComponentPaginaton(jsonData);
+
+                        // adicionar click ao componente Paginator
+                        $("#paginator>ul>li>a").click(function() {                         
+                            getData_Clientes( $(this).attr('pagina'))
+                        });
+
+                    });
+
+                }
             }
 
             // função main()
             $(() => {
-                getData_Clientes(6);
+                getData_Clientes(1); //  arregar a primeira página
+
+                /*                 
+                Para funcionar estas rotinas foi necessário instalar o JQuery no projeto,
+                no laravel por padrão ele não instala.
+                Para instalar entre na página do projeto pelo console ou terminal e digite o seguinte comando:
+
+                npm install jquery-ui --save-dev
+
+                depois vá em : resource/js/app.js e incluir as seguintes linhas:
+
+                import $ from 'jquery';
+                window.$ = window.jQuery = $;
+
+                após isso, salve o projeto e volte ao console, digite o seguinte comando:
+
+                npm install && npm run dev
+
+                quando finalizar de compilar incluir o app.js no projeto
+
+                {{asset('js/app.js')}}
+
+                 */
+
             });
         </script>
     </body>
