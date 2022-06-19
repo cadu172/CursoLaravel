@@ -36,15 +36,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // salvar imagem no disco
+        $pathArquivo = $request->file('arquivo')->store('imagens','public');
+        
         //
         $post = new Post();
         $post->email = $request->input('email');
         $post->mensagem = $request->input('mensagem');
-        $post->arquivo = ''; //$request->input();
+        $post->arquivo = $pathArquivo;
         $post->save();
 
         // voltar a página inicial
-        return redirect('/?confirmPost=true');
+        return redirect('/?confirmPost=true&source=');
 
     }
 
