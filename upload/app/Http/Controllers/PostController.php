@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,6 +18,29 @@ class PostController extends Controller
         $album = Post::all();
         return view('index',['album'=>$album]);
     }
+
+
+    /**
+     * Obtem a imagem do servidor
+     *     
+     */
+    public function getImage($id)
+    {
+        $post = Post::find($id);
+
+        if (isset($post)) {
+            
+            // excluir arquivo                       
+            //$arquivo = Storage::disk('public')->getDriver()->getAdapter()->applyPathPrefix($post->arquivo);
+            // coloquei o "Public" porque a função getAdapter não está funcionando
+            // indica que houve sucesso na exclusao
+            return Storage::download("public/" . $post->arquivo);
+        }
+
+        // indica que NAO houve sucesso na exclusao
+        return redirect('/download=false');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -94,6 +118,24 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        if (isset($post)) {
+            
+            // obtem o nome do arquivo que será apagado
+            $arquivo = $post->arquivo;            
+
+            // excluir arquivo
+            Storage::disk('public')->delete($arquivo);
+
+            // excluir registro do BD
+            $post->delete();
+
+            // indica que houve sucesso na exclusao
+            return redirect('/?delete=true');
+        }
+
+        // indica que NAO houve sucesso na exclusao
+        return redirect('/?delete=false');
     }
 }

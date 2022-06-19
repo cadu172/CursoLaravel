@@ -16,3 +16,5 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', [PostController::class,'index']);
 Route::post('/', [PostController::class,'store']);
+Route::delete('/{id}', [PostController::class,'destroy']);
+Route::get('/getImage/{id}', [PostController::class,'getImage']);
