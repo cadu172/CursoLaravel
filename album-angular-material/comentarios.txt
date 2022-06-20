@@ -1,0 +1,29 @@
+Observações sobre as aulas:
+
+Para funcionar estas rotinas foi necessário instalar o JQuery no projeto,
+no laravel por padrão ele não instala.
+Para instalar entre na página do projeto pelo console ou terminal e digite o seguinte comando:
+
+npm install jquery-ui --save-dev
+
+depois vá em : resource/js/app.js e incluir as seguintes linhas:
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+após isso, salve o projeto e volte ao console, digite o seguinte comando:
+
+npm install && npm run dev
+
+quando finalizar de compilar incluir o app.js no projeto
+
+{{asset('js/app.js')}}
+
+
+Para inicializar o servidor do angular, usar o seguinte comando:
+
+# ng serve  --host 0.0.0.0 --port=8001 --disable-host-check
+
+Para abrir no navegador digite: http://IP_MAQUINA:8001
+
+
