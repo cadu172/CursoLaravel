@@ -1,0 +1,3 @@
+onde baixar imagens para teste: https://startupstockphotos.com/
+
+comando para linkar a pasta storage com a pasta public:   php artisan storage:link
