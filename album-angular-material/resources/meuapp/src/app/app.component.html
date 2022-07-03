@@ -4,9 +4,7 @@
 
 <mat-divider></mat-divider>
 
-<div fxLayout="column" fxLayoutAlign="space-around start" >
-  <app-post-dialog></app-post-dialog>
-</div>
+<app-post-dialog></app-post-dialog>
 
 <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" >
   <app-post *ngFor="let p of posts" [post]="p"></app-post>
