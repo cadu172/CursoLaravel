@@ -4,12 +4,10 @@
 
 <mat-divider></mat-divider>
 
-<app-post-dialog></app-post-dialog>
-
 <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" >
   <app-post *ngFor="let p of posts" [post]="p"></app-post>
 </div>
 
-<button mat-fab color="primary" class="float-button" aria-label="Botao de inclusao de novas fotos">
+<button mat-fab color="primary" class="float-button" aria-label="Botao de inclusao de novas fotos" (click)="openDialog()">
   <mat-icon>add</mat-icon>
 </button>
