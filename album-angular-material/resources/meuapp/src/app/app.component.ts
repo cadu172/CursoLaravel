@@ -10,9 +10,9 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
 })
 
 export class AppComponent {
-  
+
   title = 'meuapp';
-  
+
   public posts: Post[] = [
     new Post("Carlos Eduardo","Cachorro Shiba","Cachorro Do Filme","cadu172@gmail.com","Estou fazendo o teste do texto que vai na mensagem do card"),
     new Post("Carlos Eduardo","Cachorro Shiba","Cachorro Do Filme","cadu172@gmail.com","Estou fazendo o teste do texto que vai na mensagem do card"),
@@ -29,7 +29,7 @@ export class AppComponent {
   }
 
   openDialog() {
-    
+
     const dialogRef = this.dialog.open(PostDialogComponent, {
       width: '400px'
     });
@@ -38,7 +38,7 @@ export class AppComponent {
       if ( result ) {
         console.log(result);
       }
-    });    
+    });
 
   }
 }

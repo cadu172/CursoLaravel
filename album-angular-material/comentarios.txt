@@ -27,3 +27,7 @@ Para inicializar o servidor do angular, usar o seguinte comando:
 Para abrir no navegador digite: http://IP_MAQUINA:8001
 
 
+icones usados no material
+https://fonts.google.com/icons?icon.style=Rounded
+
+
