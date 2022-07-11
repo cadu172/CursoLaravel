@@ -34,11 +34,13 @@ export class AppComponent {
       width: '400px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if ( result ) {
-        console.log(result);
+    dialogRef.afterClosed().subscribe(
+      function(result) {
+        if ( result ) {
+          console.log(result);
+        }  
       }
-    });
+    );
 
   }
 }
